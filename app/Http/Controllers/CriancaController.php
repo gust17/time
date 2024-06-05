@@ -28,7 +28,12 @@ class CriancaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $crianca = new Crianca();
+        $crianca->name = $request->input('name');
+        $crianca->cliente_id= $request->input('cliente_id');
+        $crianca->nascimento= $request->input('nascimento');
+        $crianca->save();
+        return redirect()->back();
     }
 
     /**

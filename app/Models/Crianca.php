@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Crianca extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name','nascimento','cliente_id'
+    ];
+
+    protected $casts = [
+        'nascimento' => 'datetime',
+    ];
 }

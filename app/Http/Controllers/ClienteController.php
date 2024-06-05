@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Servico;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -20,7 +21,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('clientes.create');
     }
 
     /**
@@ -28,7 +29,11 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = new Cliente();
+        $cliente->name = $request->input('name');
+        $cliente->telefone = $request->input('telefone');
+        $cliente->save();
+        return redirect()->route('clientes.crianca', ['cliente' => $cliente]);
     }
 
     /**
@@ -61,5 +66,16 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function crianca(Cliente $cliente)
+    {
+
+
+        $servicos = Servico::all();
+
+
+
+        return view('clientes.criancas', compact('cliente','servicos'));
     }
 }

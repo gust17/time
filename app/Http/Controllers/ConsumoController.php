@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Consumo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConsumoController extends Controller
 {
@@ -28,7 +29,17 @@ class ConsumoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //dd($request->all());
+        $consumo = new Consumo();
+        $consumo->user_id = Auth::id();
+        $consumo->crianca_id = $request->input('crianca_id');
+        $consumo->cliente_id = $request->input('cliente_id');
+        $consumo->save();
+
+        $consumo->servicos()->attach($request->servico_id);
+
+        return redirect(url('home'));
     }
 
     /**
