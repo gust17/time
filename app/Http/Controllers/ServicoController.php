@@ -31,6 +31,7 @@ class ServicoController extends Controller
     {
         $servico = new Servico();
         $servico->name = $request->input('name');
+        $servico->tempo = $request->input('tempo');
         $servico->valor = $request->input('valor');
         $servico->save();
 

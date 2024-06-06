@@ -73,4 +73,11 @@ class ConsumoController extends Controller
     {
         //
     }
+
+    public function servico(Consumo $consumo,$servico)
+    {
+
+        $consumo->servicos()->attach($servico);
+        return redirect(url('home'));
+    }
 }

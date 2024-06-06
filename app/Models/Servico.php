@@ -12,6 +12,7 @@ class Servico extends Model
 
     protected $fillable = [
         'name',
-        'valor'
+        'valor',
+        'tempo'
     ];
 }

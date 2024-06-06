@@ -10,7 +10,7 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Adicionar Serviços</h4>
+                        <h4 class="modal-title">Adicionar Cliente</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -48,27 +48,25 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>Serviços</span>
+                        <span>Cliente</span>
 
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">+ Novo</button>
+                        <a href="{{route('clientes.create')}}">+ Novo</a>
                     </div>
 
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Serviço</th>
-                                <th>Valor</th>
+                                <th>Cliente</th>
                                 <th>Ação</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @forelse($servicos as $servico)
+                            @forelse($clientes as $cliente)
 
                                 <tr>
-                                    <td>{{$servico->name}}</td>
-                                    <td>{{$servico->valor}}</td>
+                                    <td>{{$cliente->name}}</td>
                                     <td>
                                         <button>Editar</button></td>
                                 </tr>

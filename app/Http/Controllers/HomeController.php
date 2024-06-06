@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Consumo;
+use App\Models\Crianca;
+use App\Models\Servico;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,8 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        $clientes = Cliente::with('criancas')->get();
+        $criancas = Crianca::all();
+        $servicos = Servico::all();
         $consumos = Consumo::all();
-        return view('home',compact('consumos'));
+        return view('home',compact('consumos','servicos','clientes','criancas'));
     }
 }
