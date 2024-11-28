@@ -24,5 +24,7 @@ Route::resource('/servicos',\App\Http\Controllers\ServicoController::class);
 Route::resource('/clientes',\App\Http\Controllers\ClienteController::class);
 Route::resource('/criancas',\App\Http\Controllers\CriancaController::class);
 Route::resource('/consumo',\App\Http\Controllers\ConsumoController::class);
+Route::patch('/servicos/{id}', [ServicoController::class, 'update'])->name('servicos.update');
+Route::delete('/servicos/{id}', [ServicoController::class, 'destroy'])->name('servicos.destroy');
 Route::get('/consumo/{consumo}/servico/{servico}',[\App\Http\Controllers\ConsumoController::class,'servico'])->name('consumo.servico');
 Route::get('/clientes/crianca/{cliente}',[\App\Http\Controllers\ClienteController::class,'crianca'])->name('clientes.crianca');

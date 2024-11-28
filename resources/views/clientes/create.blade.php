@@ -5,9 +5,9 @@
 
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card-register-client">
                     <div class="card-header">
-                        Cadastrar Cliente
+                        CADASTRAR CLIENTE
                     </div>
                     <div class="card-body">
                         <form action="{{route('clientes.store')}}" method="post">

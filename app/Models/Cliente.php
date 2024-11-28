@@ -18,4 +18,10 @@ class Cliente extends Model
     {
         return $this->hasMany(Crianca::class);
     }
+
+    public function consumos()
+    {
+        return $this->hasMany(Consumo::class);
+    }
+
 }

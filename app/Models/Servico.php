@@ -15,4 +15,11 @@ class Servico extends Model
         'valor',
         'tempo'
     ];
+
+    // Modelo Servico
+    public function consumos()
+    {
+        return $this->hasMany(Consumo::class, 'servico_id');  // Chave estrangeira é 'servico_id'
+    }
+
 }

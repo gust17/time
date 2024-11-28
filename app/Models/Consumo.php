@@ -17,6 +17,14 @@ class Consumo extends Model
       'status'
     ];
 
+    protected $table = 'consumo_servico';  // Caso a tabela tenha um nome diferente do padrão
+
+    // Relacionamento com o modelo Servico
+    public function servico()
+    {
+        return $this->belongsTo(Servico::class, 'servico_id');  // Chave estrangeira é 'servico_id'
+    }
+
 
 
 
