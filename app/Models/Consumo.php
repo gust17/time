@@ -17,7 +17,9 @@ class Consumo extends Model
         'status'
     ];
 
-    protected $table = 'consumo_servico';  // Caso a tabela tenha um nome diferente do padrão
+    protected $table = 'consumo_servico';
+
+    public $timestamps = true;
 
     // Relacionamento com o modelo Servico
     public function servico()
@@ -40,7 +42,7 @@ class Consumo extends Model
         return $result;
     }
 
-    public $timestamps = true;
+
 
     public function cliente()
     {
