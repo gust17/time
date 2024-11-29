@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Consumo extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-      'crianca_id',
-      'user_id',
-      'cliente_id',
-      'status'
+        'crianca_id',
+        'user_id',
+        'cliente_id',
+        'status'
     ];
 
     protected $table = 'consumo_servico';  // Caso a tabela tenha um nome diferente do padrão
@@ -24,9 +24,6 @@ class Consumo extends Model
     {
         return $this->belongsTo(Servico::class, 'servico_id');  // Chave estrangeira é 'servico_id'
     }
-
-
-
 
     public function servicos()
     {
@@ -38,14 +35,16 @@ class Consumo extends Model
         $tempos = $this->servicos;
         $result = 0;
         foreach ($tempos as $tempo) {
-            $result+= $tempo->tempo;
+            $result += $tempo->tempo;
         }
         return $result;
     }
 
+    public $timestamps = true;
+
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
     public function crianca()
@@ -55,10 +54,17 @@ class Consumo extends Model
 
     public function tempo()
     {
-        $tempoTotal = ($this->totalTempo());
-
-        $criado = $this->attributes['created_at'];
-        dd($criado->addMinutes($tempoTotal));
-        return $this->attributes['created_at']->addMinutes($this->totalTempo);
+        $tempoTotal = $this->totalTempo();  // Obter o tempo total dos serviços
+    
+        // Garantir que 'created_at' seja uma instância de Carbon e não seja nulo
+        $criado = $this->created_at;
+    
+        if (!$criado || !$criado instanceof Carbon) {
+            // Inicialize com o valor atual se 'created_at' for nulo
+            $criado = Carbon::now();
+        }
+    
+        // Adicione os minutos ao valor de 'created_at'
+        return $criado->addMinutes($tempoTotal);
     }
 }

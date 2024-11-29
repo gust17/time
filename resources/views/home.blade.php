@@ -116,8 +116,8 @@
                             @forelse($consumos as $consumo)
 
                                 <tr>
-                                    <td>{{ $consumo->cliente?->name ?? 'Cliente não encontrado' }}</td>
-                                    <td>{{ $consumo->crianca->name}}</td>
+                                    <td>{{ optional($consumo->cliente)->name }}</td>
+                                    <td>{{ optional($consumo->crianca)->name }}</td>
                                     <td>{{ $consumo->created_at->addMinutes($consumo->totalTempo())->format('H:i:s') }}</td>
                                     <td>                    <span id="countdown_{{ $consumo->id }}">Calculando...</span>
 

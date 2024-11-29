@@ -30,7 +30,7 @@ class HomeController extends Controller
         $clientes = Cliente::with('criancas')->get();
         $criancas = Crianca::all();
         $servicos = Servico::all();
-        $consumos = Consumo::all();
-        return view('home',compact('consumos','servicos','clientes','criancas'));
+        $consumos = Consumo::with('cliente', 'crianca')->get(); // Carregando cliente e crianca
+        return view('home', compact('consumos', 'servicos', 'clientes', 'criancas'));
     }
 }
