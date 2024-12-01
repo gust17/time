@@ -17,8 +17,6 @@ class Consumo extends Model
         'status'
     ];
 
-    protected $table = 'consumo_servico';
-
     public $timestamps = true;
 
     // Relacionamento com o modelo Servico

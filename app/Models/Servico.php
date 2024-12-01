@@ -19,7 +19,7 @@ class Servico extends Model
     // Modelo Servico
     public function consumos()
     {
-        return $this->hasMany(Consumo::class, 'servico_id');  // Chave estrangeira é 'servico_id'
+        return $this->belongsToMany(Consumo::class);
     }
 
 }

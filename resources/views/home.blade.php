@@ -94,7 +94,6 @@
                         <a href="{{route('servicos.index')}}" class="btn btn-primary">Serviços</a>
                         <a href="{{route('clientes.index')}}" class="btn btn-info">Clientes</a>
                         <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal"> Comandas </button>
-
                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">+Novo</button>
                     </div>
                 </div>
@@ -123,14 +122,16 @@
 
                                     </td>
                                     <td>
-                                        @forelse($servicos as $servico)
-                                            <a class="btn btn-primary w-20" href="{{ route('consumo.servico', ['consumo' => $consumo->id, 'servico' => $servico->id]) }}">
-                                                {{ $servico->name }}
-                                            </a>
-
-                                        @empty
-                                        @endforelse
-
+                                    <a class="btn btn-primary w-20" href="{{ route('consumo.servico', ['consumo' => $consumo->id, 'servico' => $servico->id]) }}">{{ $servico->name }}</a>
+                                    
+                                        <form action="{{ route('consumo.destroy', $consumo->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta comanda?')">
+                                        Excluir
+                                        </button>
+                                        </form>
+                                    </td>
                                     </td>
 
 

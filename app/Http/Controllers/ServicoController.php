@@ -14,6 +14,11 @@ class ServicoController extends Controller
         return view('servico.index', compact('servicos'));
     }
 
+    public function create()
+    {
+        return view('servico.create');
+    }
+
     public function store(Request $request)
     {
         $servico = new Servico();
@@ -38,7 +43,7 @@ class ServicoController extends Controller
      */
     public function edit(Servico $servico)
     {
-        //
+        return view("servico.edit", compact("servico"));
     }
 
     /**
@@ -53,10 +58,10 @@ class ServicoController extends Controller
         'valor' => 'required|numeric|min:0',
     ]);
 
-    $servico = Servico::findOrFail($id);
+
     $servico->update($validated);
 
-    return redirect()->back()->with('success', 'Serviço atualizado com sucesso!');
+    return redirect()->route('servicos.index')->with('success', 'Serviço atualizado com sucesso!');
     }
 
 
