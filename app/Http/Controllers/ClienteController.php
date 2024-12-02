@@ -38,14 +38,6 @@ class ClienteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Cliente $cliente)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Cliente $cliente)
@@ -85,17 +77,12 @@ class ClienteController extends Controller
         $cliente->delete();
     
         // Redirecionar com uma mensagem de sucesso
-        return redirect()->route('cliente.index')->with('success', 'Cliente excluído com sucesso!');
+        return redirect()->route('clientes.index')->with('success', 'Cliente excluído com sucesso!');
     }
 
     public function crianca(Cliente $cliente)
     {
-
-
         $servicos = Servico::all();
-
-
-
         return view('clientes.criancas', compact('cliente','servicos'));
     }
 }

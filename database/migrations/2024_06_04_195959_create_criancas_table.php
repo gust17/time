@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('criancas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('cliente_id')->constrained();
+            $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
             $table->date('nascimento');
             $table->timestamps();
         });

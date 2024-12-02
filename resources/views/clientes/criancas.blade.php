@@ -89,6 +89,8 @@
             </div>
         </div>
 
+
+        
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -97,6 +99,7 @@
 
                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">+ Novo</button>
                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#novaComanda">Abrir Comanda</button>
+                        <a href="{{route('clientes.create')}}" class="btn btn-info">Voltar</a>
                     </div>
 
                     <div class="card-body">

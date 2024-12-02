@@ -25,11 +25,11 @@ class Cliente extends Model
     }
 
     public function index()
-{
+    {
     // Buscando todos os clientes do banco de dados
     $clientes = Cliente::all();
 
     // Retornando a view com os clientes
     return view('clientes.index', compact('clientes'));
-}
+    }
 }

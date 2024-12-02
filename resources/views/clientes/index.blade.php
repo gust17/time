@@ -31,7 +31,14 @@
                                     <td>{{$cliente->telefone}}</td>
                                     <td>
                                     <a href="{{route('clientes.edit', $cliente->id)}}" type="button" class="btn btn-info">Editar</a>
-                                    
+                                    <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este serviço?')">
+                                        Excluir
+                                        </button>
+                                        </form>
+                                    </td>
                                     </td>
                                 </tr>
 

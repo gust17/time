@@ -5,7 +5,7 @@
         <!-- Tabela -->
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card-services">
+                <div class="card-clientes">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span>Clientes</span>
 
@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="card-body-service">
-                    <form id="serviceForm" action="{{route('clientes.update', $clientes)}}" method="post">
+                    <form id="clienteForm" action="{{route('clientes.update', $cliente)}}" method="post">
                     @csrf
                     @method("PUT")
                     <input type="hidden" id="clienteId" name="id"> 
@@ -25,7 +25,7 @@
 
                     <div class="form-group mt-3">
                         <label for="telefone">Telefone</label>
-                        <input type="number" id="tempo" name="tempo" value="{{$cliente->telefone}}" class="form-control" required>
+                        <input type="text" id="tempo" name="tempo" value="{{$cliente->telefone}}" class="form-control" required>
                     </div>
 
                     <div class="form-group mt-3">
