@@ -14,20 +14,16 @@ class Consumo extends Model
         'crianca_id',
         'user_id',
         'cliente_id',
-        'status'
+        'status',
+        'valor_total',
+        'tempo_total'
     ];
 
     public $timestamps = true;
 
-    // Relacionamento com o modelo Servico
-    public function servico()
-    {
-        return $this->belongsTo(Servico::class, 'servico_id');  // Chave estrangeira é 'servico_id'
-    }
-
     public function servicos()
     {
-        return $this->belongsToMany(Servico::class);
+        return $this->belongsToMany(Servico::class, 'consumo_servico')->withTimestamps();
     }
 
     public function totalTempo()
@@ -47,6 +43,7 @@ class Consumo extends Model
         return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
+
     public function crianca()
     {
         return $this->belongsTo(Crianca::class);
@@ -57,11 +54,10 @@ class Consumo extends Model
         $tempoTotal = $this->totalTempo();  // Obter o tempo total dos serviços
     
         // Garantir que 'created_at' seja uma instância de Carbon e não seja nulo
-        $criado = $this->created_at;
-    
-        if (!$criado || !$criado instanceof Carbon) {
-            // Inicialize com o valor atual se 'created_at' for nulo
-            $criado = Carbon::now();
+        if ($this->created_at) {
+            $criado = $this->created_at->copy(); // Cria um clone do valor original
+        } else {
+            $criado = Carbon::now(); // Inicializa com o horário atual
         }
     
         // Adicione os minutos ao valor de 'created_at'

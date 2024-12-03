@@ -16,10 +16,16 @@ class Servico extends Model
         'tempo'
     ];
 
+    protected $casts = [
+        'valor' => 'float',
+        'tempo' => 'integer',
+    ];
+
     // Modelo Servico
     public function consumos()
     {
-        return $this->belongsToMany(Consumo::class);
+        return $this->belongsToMany(Consumo::class, 'consumo_servico')->withTimestamps();
     }
+    
 
 }
