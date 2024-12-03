@@ -92,9 +92,10 @@
                 <div class="card">
                     <div class="card-body">
                         <a href="{{route('servicos.index')}}" class="btn btn-primary">Serviços</a>
-                        <a href="{{route('clientes.index')}}" class="btn btn-info">Clientes</a>
-                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal"> Comandas </button>
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">+Novo</button>
+                        <a href="{{route('clientes.index')}}" class="btn btn-primary">Clientes</a>
+                        <!--<a href="{{route('clientes.index')}}" class="btn btn-info">Relatórios</a> -->
+                        <!--<a href="{{route('clientes.index')}}" class="btn btn-info">Registro</a> -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">+Novo</button>
                     </div>
                 </div>
 
@@ -108,6 +109,7 @@
                                 <th>Hora final</th>
                                 <th>Contador</th>
                                 <th>Ações</th>
+                                <th>Finalizar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -123,15 +125,23 @@
                                     </td>
                                     <td>
                                     <a class="btn btn-primary w-20" href="{{ route('consumo.servico', ['consumo' => $consumo->id, 'servico' => $servico->id]) }}">{{ $servico->name }}</a>
-                                    
-                                        <form action="{{ route('consumo.destroy', $consumo->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta comanda?')">
-                                        Excluir
-                                        </button>
-                                        </form>
+                                    <form action="{{ route('consumo.destroy', $consumo->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta comanda?')">
+                                    Excluir
+                                    </button>
+                                    </form>
                                     </td>
+
+                                    <td>
+                                    <form action="{{ route('consumo.destroy', $consumo->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-success" onclick="return confirm('Tem certeza que deseja finalizar esta comanda?')">
+                                    Finalizar comanda
+                                    </button>
+                                    </form>
                                     </td>
 
 

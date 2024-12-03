@@ -25,7 +25,7 @@
 
                     <div class="form-group mt-3">
                         <label for="telefone">Telefone</label>
-                        <input type="text" id="tempo" name="tempo" value="{{$cliente->telefone}}" class="form-control" required>
+                        <input type="text" id="telefone" name="telefone" value="{{$cliente->telefone}}" class="form-control" required>
                     </div>
 
                     <div class="form-group mt-3">

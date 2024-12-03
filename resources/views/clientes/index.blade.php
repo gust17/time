@@ -30,6 +30,12 @@
                                     <td>{{$cliente->name}}</td>
                                     <td>{{$cliente->telefone}}</td>
                                     <td>
+                           @foreach($cliente->criancas as $crianca)
+                                {{$crianca->name}}
+                                @if(!$loop->last), @endif
+                            @endforeach
+                                    </td>
+                                    <td>
                                     <a href="{{route('clientes.edit', $cliente->id)}}" type="button" class="btn btn-info">Editar</a>
                                     <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" style="display:inline;">
                                         @csrf
@@ -56,5 +62,3 @@
         </div>
     </div>
 @endsection
-
-@section('scripts')
