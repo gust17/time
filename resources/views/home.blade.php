@@ -22,7 +22,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">FECHAR</button>
                     </div>
 
                 </div>
@@ -34,7 +34,7 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Abrir Comanda</h4>
+                        <h4 class="modal-title">Abrir comandas</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label>Cliente</label>
                                 <select name="cliente_id" id="cliente_id" class="form-control">
-                                    <option value="">Selecione um cliente...</option>
+                                    <option value="">Selecione um cliente</option>
                                     @foreach($clientes as $cliente)
                                         <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
                                     @endforeach
@@ -55,14 +55,14 @@
                             <div class="form-group">
                                 <label>Criança</label>
                                 <select name="crianca_id" id="crianca_id" class="form-control">
-                                    <option value="">Selecione uma criança...</option>
+                                    <option value="">Selecione uma criança</option>
                                     @foreach($criancas as $crianca)
                                         <option value="{{ $crianca->id }}" data-cliente="{{ $crianca->cliente_id }}">{{ $crianca->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Tempo</label>
+                                <label>Serviço</label>
                                 <select name="servico_id" id="" class="form-control">
                                     @forelse($servicos as $servico)
 
@@ -81,7 +81,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                     </div>
 
                 </div>
@@ -91,11 +91,11 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{route('servicos.index')}}" class="btn btn-primary">Serviçoes</a>
-                        <a href="{{route('clientes.index')}}" class="btn btn-info">Clientes</a>
-                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Abrir Comanda
-                        </button>
-                        <button>Registros</button>
+                        <a href="{{route('servicos.index')}}" class="btn btn-primary">Serviços</a>
+                        <a href="{{route('clientes.index')}}" class="btn btn-primary">Clientes</a>
+                        <!--<a href="{{route('clientes.index')}}" class="btn btn-info">Relatórios</a> -->
+                        <!--<a href="{{route('clientes.index')}}" class="btn btn-info">Registro</a> -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">+Novo</button>
                     </div>
                 </div>
 
@@ -106,9 +106,10 @@
                             <tr>
                                 <th>Cliente</th>
                                 <th>Criança</th>
-                                <th>Hora Termino</th>
-                                <th>CONTADOR</th>
+                                <th>Hora final</th>
+                                <th>Contador</th>
                                 <th>Ações</th>
+                                <th>Finalizar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -116,21 +117,31 @@
                             @forelse($consumos as $consumo)
 
                                 <tr>
-                                    <td>{{$consumo->cliente->name}}</td>
-                                    <td>{{$consumo->crianca->name}}</td>
+                                    <td>{{ optional($consumo->cliente)->name }}</td>
+                                    <td>{{ optional($consumo->crianca)->name }}</td>
                                     <td>{{ $consumo->created_at->addMinutes($consumo->totalTempo())->format('H:i:s') }}</td>
                                     <td>                    <span id="countdown_{{ $consumo->id }}">Calculando...</span>
 
                                     </td>
                                     <td>
-                                        @forelse($servicos as $servico)
-                                            <a class="btn btn-primary w-20" href="{{ route('consumo.servico', ['consumo' => $consumo->id, 'servico' => $servico->id]) }}">
-                                                {{ $servico->name }}
-                                            </a>
+                                    <a class="btn btn-primary w-20" href="{{ route('consumo.servico', ['consumo' => $consumo->id, 'servico' => $servico->id]) }}">{{ $servico->name }}</a>
+                                    <form action="{{ route('consumo.destroy', $consumo->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta comanda?')">
+                                    Excluir
+                                    </button>
+                                    </form>
+                                    </td>
 
-                                        @empty
-                                        @endforelse
-
+                                    <td>
+                                    <form action="{{ route('consumo.destroy', $consumo->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-success" onclick="return confirm('Tem certeza que deseja finalizar esta comanda?')">
+                                    Finalizar comanda
+                                    </button>
+                                    </form>
                                     </td>
 
 

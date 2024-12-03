@@ -21,6 +21,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
 
             $table->tinyInteger('pago')->default(0);
+
+            $table->integer('tempo_total')->default(0); // Tempo total (em minutos)
+            
+            $table->decimal('valor_total', 10, 2)->default(0); // Valor total dos serviços
             $table->timestamps();
         });
     }

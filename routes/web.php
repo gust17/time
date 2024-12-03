@@ -20,9 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/servicos',\App\Http\Controllers\ServicoController::class);
-Route::resource('/clientes',\App\Http\Controllers\ClienteController::class);
-Route::resource('/criancas',\App\Http\Controllers\CriancaController::class);
-Route::resource('/consumo',\App\Http\Controllers\ConsumoController::class);
-Route::get('/consumo/{consumo}/servico/{servico}',[\App\Http\Controllers\ConsumoController::class,'servico'])->name('consumo.servico');
-Route::get('/clientes/crianca/{cliente}',[\App\Http\Controllers\ClienteController::class,'crianca'])->name('clientes.crianca');
+Route::resource('/servicos', \App\Http\Controllers\ServicoController::class);
+Route::resource('/clientes', \App\Http\Controllers\ClienteController::class);
+Route::resource('/criancas', \App\Http\Controllers\CriancaController::class);
+Route::resource('/consumo', \App\Http\Controllers\ConsumoController::class);
+Route::get('/consumo/{consumo}/servico/{servico}', [\App\Http\Controllers\ConsumoController::class, 'servico'])->name('consumo.servico');
+Route::get('/clientes/crianca/{cliente}', [\App\Http\Controllers\ClienteController::class, 'crianca'])->name('clientes.crianca');

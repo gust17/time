@@ -2,64 +2,23 @@
 
 @section('content')
 
-    <div class="container">
-        <!-- Modal -->
-        <div class="modal" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Adicionar Serviços</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form action="{{route('servicos.store')}}" method="post">
-                            @csrf
-                            <div class="form-group mt-3">
-                                <label for="">Serviço</label>
-                                <input type="text" name="name" class="form-control">
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="">Tempo</label>
-                                <input type="number" name="tempo" class="form-control">
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="">Valor</label>
-                                <input type="number" name="valor" class="form-control">
-                            </div>
-                            <div class="form-group mt-3">
-                                <button class="btn btn-success w-100">Cadastrar</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card-services">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span>Serviços</span>
-
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">+ Novo</button>
+                        <a href="{{route('servicos.create')}}" class="btn btn-info">+Novo</a>
+                        <a href="{{route('home')}}" class="btn btn-info">Voltar</a>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body-service">
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th>Serviço</th>
                                 <th>Valor</th>
-                                <th>Ação</th>
+                                <th>Tempo</th>
+                                <th>Ação</th> 
                             </tr>
                             </thead>
                             <tbody>
@@ -69,8 +28,17 @@
                                 <tr>
                                     <td>{{$servico->name}}</td>
                                     <td>{{$servico->valor}}</td>
+                                    <td>{{$servico->tempo}}</td>
                                     <td>
-                                        <button>Editar</button></td>
+                                    <a href="{{route('servicos.edit', $servico)}}" type="button" class="btn btn-info">Editar</a>
+                                        <form action="{{ route('servicos.destroy', $servico->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este serviço?')">
+                                        Excluir
+                                        </button>
+                                        </form>
+                                    </td>
                                 </tr>
 
                             @empty
@@ -84,3 +52,4 @@
         </div>
     </div>
 @endsection
+

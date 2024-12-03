@@ -38,19 +38,11 @@ class ClienteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Cliente $cliente)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view("clientes.edit", compact("cliente"));
     }
 
     /**
@@ -58,25 +50,39 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'telefone' => 'required|numeric|min:11',
+    ]);
+
+    $cliente->update($validated);
+
+    return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        // Buscar o serviço pelo ID
+        $cliente = Cliente::findOrFail($id);
+    
+        // Verificar se o cliente está sendo utilizado em uma comanda (na tabela consumo_servico)
+        $isUsed = $cliente->consumos()->exists();  // Verifica se há registros relacionados
+    
+        if ($isUsed) {
+            // Se o cliente está sendo utilizado, redireciona com uma mensagem de erro
+            return redirect()->route('clientes.index')->with('error', 'Este cliente não pode ser excluído porque está sendo usado em uma comanda.');
+        }
+    
+        // Excluir o serviço se não estiver sendo utilizado
+        $cliente->delete();
+    
+        // Redirecionar com uma mensagem de sucesso
+        return redirect()->route('clientes.index')->with('success', 'Cliente excluído com sucesso!');
     }
 
     public function crianca(Cliente $cliente)
     {
-
-
         $servicos = Servico::all();
-
-
-
         return view('clientes.criancas', compact('cliente','servicos'));
     }
 }

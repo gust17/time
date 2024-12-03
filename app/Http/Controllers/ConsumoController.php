@@ -63,15 +63,22 @@ class ConsumoController extends Controller
      */
     public function update(Request $request, Consumo $consumo)
     {
-        //
-    }
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'tempo' => 'required|numeric|min:1',
+        'valor' => 'required|numeric|min:0',
+    ]);
+    } 
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Consumo $consumo)
     {
-        //
+        $consumo->servicos()->detach();
+        // Excluir o serviço se não estiver sendo utilizado
+        $consumo->delete();
+        //dd($consumo);
+    
+        // Redirecionar com uma mensagem de sucesso
+        return redirect()->route('home')->with('success', 'Comanda excluída com sucesso!');
     }
 
     public function servico(Consumo $consumo,$servico)

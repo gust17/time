@@ -8,7 +8,7 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Cadastar Criança</h4>
+                        <h4 class="modal-title">Cadastrar criança</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -33,7 +33,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                     </div>
 
                 </div>
@@ -89,6 +89,8 @@
             </div>
         </div>
 
+
+        
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -97,6 +99,7 @@
 
                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">+ Novo</button>
                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#novaComanda">Abrir Comanda</button>
+                        <a href="{{route('clientes.create')}}" class="btn btn-info">Voltar</a>
                     </div>
 
                     <div class="card-body">
